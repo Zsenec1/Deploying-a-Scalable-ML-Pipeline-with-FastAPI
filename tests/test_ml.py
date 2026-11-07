@@ -40,10 +40,14 @@ def test_train_model(sample_data):
     assert isinstance(model, RandomForestClassifier)
 
 def test_compute_model_metrics():
-    """Test if compute_model_metrics returns expected float values."""
+    """Test if compute_model_metrics returns exact expected numeric values."""
     y_true = [0, 1, 1, 0, 1]
     y_pred = [0, 1, 0, 0, 1]
     precision, recall, fbeta = compute_model_metrics(y_true, y_pred)
+    
+    assert precision == pytest.approx(1.0)
+    assert recall == pytest.approx(2/3)
+    assert fbeta == pytest.approx(0.8)
     
     assert isinstance(precision, float)
     assert isinstance(recall, float)
